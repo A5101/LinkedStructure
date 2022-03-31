@@ -48,9 +48,9 @@ namespace LinkedStructure
             Insert(value, count);
         }
 
-        public T Delete()
+        public T DeleteLast()
         {
-            return Delete(count);
+            return Delete(count-1);
         }
 
         public T Delete(int pos)
@@ -109,6 +109,22 @@ namespace LinkedStructure
                 temp[i] = A[i];
             }
             A = temp;
+        }
+
+        public T this[int pos]
+        {
+            get 
+            {
+                if (pos >= 0 && pos < count)
+                    return A[pos];
+                else throw new Exception();
+            }
+            set
+            {
+                if (pos >= 0 && pos < count)
+                    A[pos] = value;
+                else throw new Exception();
+            }
         }
     }
 }
