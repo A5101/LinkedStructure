@@ -4,14 +4,14 @@ using System.Collections.Generic;
 
 namespace LinkedStructure
 {
-    //interface IStack<T>:IEnumerable<T>
-    //{
-    //    int Count { get; }
-    //    T Pop();
-    //    T Peek();
-    //    void Push(T value);
-    //}
-    public class Stack<T>//:IStack<T>
+    interface IStack<T> : IEnumerable<T>
+    {
+        int Count { get; }
+        T Pop();
+        T Peek();
+        void Push(T value);
+    }
+    public class Stack<T>:IStack<T>
     {
         int count;
         public int Count { get => count;}
@@ -50,6 +50,26 @@ namespace LinkedStructure
             node.next = Head;
             Head = node;
             count++;
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        IEnumerator<T> IEnumerable<T>.GetEnumerator()
+        {
+            return (IEnumerator<T>)GetEnumerator();
+        }
+
+        public IEnumerator<Node<T>> GetEnumerator()
+        {
+            Node<T> node = Head;
+            while (node != null)
+            {
+                yield return node;
+                node = node.next;
+            }
         }
     }
 }

@@ -3,17 +3,17 @@ using System.Collections.Generic;
 
 namespace LinkedStructure
 {
-    //interface IDequeue<T> : IEnumerable<T>
-    //{
-    //    int Count { get; }
-    //    void PushFront(T value);
-    //    void PushBack(T value);
-    //    T PeekFront();
-    //    T PeekBack();
-    //    T PopFront();
-    //    T PopBack();
-    //}
-    public class Deque<T>//:IDequeue<T>
+    interface IDequeue<T> : IEnumerable<T>
+    {
+        int Count { get; }
+        void PushFront(T value);
+        void PushBack(T value);
+        T PeekFront();
+        T PeekBack();
+        T PopFront();
+        T PopBack();
+    }
+    public class Deque<T>:IDequeue<T>
     {
         int count = 0;
         public int Count { get => count; }
@@ -25,10 +25,10 @@ namespace LinkedStructure
 
         }
 
-        //public Deque(IEnumerable<T> collection)
-        //{
+        public Deque(IEnumerable<T> collection)
+        {
 
-        //}
+        }
 
         public void PushFront(T value)
         {

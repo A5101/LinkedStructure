@@ -3,14 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 namespace LinkedStructure
 {
-    //interface IQueue<T>:IEnumerable<T>
-    //{
-    //    int Count { get; }
-    //    T Dequeue();
-    //    void Enqueue(T value);
-    //    T Peek();
-    //}
-    public class Queue<T>//:IQueue<T>
+    interface IQueue<T> : IEnumerable<T>
+    {
+        int Count { get; }
+        T Dequeue();
+        void Enqueue(T value);
+        T Peek();
+    }
+    public class Queue<T>:IQueue<T>
     {
         int count;
         public int Count { get => count; }
@@ -66,6 +66,26 @@ namespace LinkedStructure
         {
             if (count != 0) return last.Value;
             else throw new Exception();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        IEnumerator<T> IEnumerable<T>.GetEnumerator()
+        {
+            return (IEnumerator<T>)GetEnumerator();
+        }
+
+        public IEnumerator<Node<T>> GetEnumerator()
+        {
+            Node<T> node = first;
+            while (node != null)
+            {
+                yield return node;
+                node = node.next;
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,17 +7,17 @@ using System.Threading.Tasks;
 
 namespace LinkedStructure
 {
-    //interface IList<T>:IEnumerable<T>
-    //{
-    //    int Capacity { get; }
-    //    int Count { get; }
-    //    void Add(T value);
-    //    T Delete();
-    //    T Delete(int pos);
-    //    void Insert(T value, int pos);
-    //    void Resize(int capacity);
-    //}
-    public class List<T>//:IList<T>
+    interface IList<T> : IEnumerable<T>
+    {
+        int Capacity { get; }
+        int Count { get; }
+        void Add(T value);
+        T DeleteLast();
+        T Delete(int pos);
+        void Insert(T value, int pos);
+        void Resize(int capacity);
+    }
+    public class List<T>:IList<T>
     {
         int capacity;
         public int Capacity { get => capacity; }
@@ -125,6 +126,15 @@ namespace LinkedStructure
                     A[pos] = value;
                 else throw new Exception();
             }
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            return ((IEnumerable<T>)A).GetEnumerator();
+        }
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return A.GetEnumerator();
         }
     }
 }

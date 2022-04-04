@@ -4,25 +4,25 @@ using System.Collections.Generic;
 
 namespace LinkedStructure
 {
-    //interface IDoublyLinkedList<T> : IEnumerable<T>
-    //{
-    //    Node<T> First { get; set; }
-    //    Node<T> Last { get; set; }
-    //    int Count { get; }
-    //    void AddAfter(Node<T> node, T value);
-    //    void AddAfter(Node<T> node, Node<T> new_node);
-    //    void AddBefore(Node<T> node, T value);
-    //    void AddBefore(Node<T> node, Node<T> new_node);
-    //    void AddFirst(T value);
-    //    void AddFirst(Node<T> new_node);
-    //    void AddLast(T value);
-    //    void AddLast(Node<T> new_node);
-    //    void Remove(T value);
-    //    void Remove(Node<T> node);
-    //    void RemoveFirst();
-    //    void RemoveLast();
-    //}
-    public class DoublyLinkedList<T>//:IDoublyLinkedList<T>
+    interface IDoublyLinkedList<T> : IEnumerable<T>
+    {
+        Node<T> First { get;}
+        Node<T> Last { get; }
+        int Count { get; }
+        void AddAfter(Node<T> node, T value);
+        void AddAfter(Node<T> node, Node<T> new_node);
+        void AddBefore(Node<T> node, T value);
+        void AddBefore(Node<T> node, Node<T> new_node);
+        void AddFirst(T value);
+        void AddFirst(Node<T> new_node);
+        void AddLast(T value);
+        void AddLast(Node<T> new_node);
+        bool Remove(T value);
+        //void Remove(Node<T> node);
+        void RemoveFirst();
+        void RemoveLast();
+    }
+    public class DoublyLinkedList<T>:IDoublyLinkedList<T>
     {
         Node<T> first;
         public Node<T> First => first;
@@ -38,14 +38,14 @@ namespace LinkedStructure
 
         }
 
-        //public DoublyLinkedList(IEnumerable<T> collection)
-        //{
-        //    if (collection == null) throw new ArgumentNullException();
-        //    foreach (var item in collection)
-        //    {
-        //        AddLast(item);
-        //    }
-        //}
+        public DoublyLinkedList(IEnumerable<T> collection)
+        {
+            if (collection == null) throw new ArgumentNullException();
+            foreach (var item in collection)
+            {
+                AddLast(item);
+            }
+        }
 
         public void AddAfter(Node<T> node, T value)
         {
@@ -119,20 +119,20 @@ namespace LinkedStructure
             }
         }
 
-        //public void Clear()
-        //{
-        //    Node<T> node1 = first;
-        //    while (node1 != null)
-        //    {
-        //        Node<T> node2 = node1;
-        //        node1 = node1.next;
-        //        node2.Annul();
-        //    }
-        //    first = null;
-        //    count = 0;
-        //}
+        public void Clear()
+        {
+            Node<T> node1 = first;
+            while (node1 != null)
+            {
+                Node<T> node2 = node1;
+                node1 = node1.next;
+                node2.Annul();
+            }
+            first = null;
+            count = 0;
+        }
 
-        //public bool Contains(T value) => Find(value) != null;
+        public bool Contains(T value) => Find(value) != null;
 
         public Node<T> Find(T value)
         {
@@ -247,24 +247,24 @@ namespace LinkedStructure
             last = node;
         }
 
-        //IEnumerator IEnumerable.GetEnumerator()
-        //{
-        //    return GetEnumerator();
-        //}
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
 
-        //IEnumerator<T> IEnumerable<T>.GetEnumerator()
-        //{
-        //    return (IEnumerator<T>)GetEnumerator();
-        //}
+        IEnumerator<T> IEnumerable<T>.GetEnumerator()
+        {
+            return (IEnumerator<T>)GetEnumerator();
+        }
 
-        //public IEnumerator<Node<T>> GetEnumerator()
-        //{
-        //    Node<T> node = first;
-        //    while (node != null)
-        //    {
-        //        yield return node;
-        //        node = node.next;
-        //    }
-        //}
+        public IEnumerator<Node<T>> GetEnumerator()
+        {
+            Node<T> node = first;
+            while (node != null)
+            {
+                yield return node;
+                node = node.next;
+            }
+        }
     }
 }
