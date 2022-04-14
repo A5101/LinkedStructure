@@ -16,6 +16,7 @@ namespace LinkedStructure
         void CopyTo(T[] array, int index);
         Node<T> Find(T value);
         bool Remove(T value);
+        T[] ToArray();
     }
     public class SinglyLinkedList<T>: ISinglyLinkedList<T>
     {
@@ -86,7 +87,7 @@ namespace LinkedStructure
                 array[index++] = node.Value;
                 node = node.next;
             }
-            while (node != first);
+            while (node != null);
         }
 
         public Node<T> Find(T value)
@@ -148,6 +149,18 @@ namespace LinkedStructure
                 current = current.next;
             }
             return false;
+        }
+
+        public T[] ToArray()
+        {
+            T[] array = new T[count];
+            Node<T> node = first;
+            for (int i = 0; i < count; i++)
+            {
+                array[i] = node.Value;
+                node = node.Next;
+            }
+            return array;
         }
 
         IEnumerator IEnumerable.GetEnumerator()

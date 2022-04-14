@@ -87,5 +87,14 @@ namespace LinkedTests
             int res = list[1];
             Assert.AreEqual(exp,res);
         }
+        [Test]
+        public void InsertIncorrectPosTest()
+        {
+            List<int> list = new List<int>();
+            list.Add(1);
+            list.Add(2);
+            list.Add(3);
+            Assert.Throws<Exception>(() => list.Insert(5, 5));
+        }
     }
 }

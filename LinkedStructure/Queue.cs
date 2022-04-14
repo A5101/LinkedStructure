@@ -6,13 +6,17 @@ namespace LinkedStructure
     interface IQueue<T> : IEnumerable<T>
     {
         int Count { get; }
+        void Clear();
+        bool Contains(T value);
+        void CopyTo(T[] array, int index);
         T Dequeue();
         void Enqueue(T value);
         T Peek();
+        T[] ToArray();
     }
     public class Queue<T>:IQueue<T>
     {
-        int count;
+        int count = 0;
         public int Count { get => count; }
 
         Node<T> first;
@@ -25,7 +29,61 @@ namespace LinkedStructure
 
         public Queue(IEnumerable<T> collection)
         {
+            if (collection == null) throw new ArgumentNullException();
+            foreach (var item in collection)
+            {
+                Enqueue(item);
+            }
+        }
 
+        public void Clear()
+        {
+            Node<T> node1 = first;
+            while (node1 != null)
+            {
+                Node<T> node2 = node1;
+                node1 = node1.next;
+                node2.Annul();
+            }
+            first = null;
+            count = 0;
+        }
+
+        public bool Contains(T value)
+        {
+            Node<T> node = first;
+            if (node != null)
+            {
+                if (value != null)
+                {
+                    while (!node.Value.Equals(value) && (node.next != null))
+                    {
+                        node = node.next;
+                        if (node.next == null) return false;
+                    }
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public void CopyTo(T[] array, int index)
+        {
+            if (array == null)
+                throw new ArgumentNullException(nameof(array));
+            if (index < 0 || index > array.Length)
+                throw new ArgumentOutOfRangeException();
+            if (array.Length - index < Count)
+                throw new ArgumentException();
+            Node<T> node = last;
+            if (node == null)
+                return;
+            do
+            {
+                array[index++] = node.Value;
+                node = node.previous;
+            }
+            while (node != null);
         }
 
         public T Dequeue()
@@ -45,7 +103,7 @@ namespace LinkedStructure
                 count--;
                 return temp.Value;
             }
-            else throw new Exception();
+            else throw new NullReferenceException();
         }
 
         public void Enqueue(T value)
@@ -64,8 +122,20 @@ namespace LinkedStructure
 
         public T Peek()
         {
-            if (count != 0) return last.Value;
-            else throw new Exception();
+            if (count != 0) return first.Value;
+            else throw new NullReferenceException();
+        }
+
+        public T[] ToArray()
+        {
+            T[] array = new T[count];
+            Node<T> node = last;
+            for (int i = 0; i < count; i++)
+            {
+                array[i] = node.Value;
+                node = node.previous;
+            }
+            return array;
         }
 
         IEnumerator IEnumerable.GetEnumerator()

@@ -6,7 +6,7 @@ namespace LinkedStructure
 {
     interface IDoublyLinkedList<T> : IEnumerable<T>
     {
-        Node<T> First { get;}
+        Node<T> First { get; }
         Node<T> Last { get; }
         int Count { get; }
         void AddAfter(Node<T> node, T value);
@@ -17,10 +17,15 @@ namespace LinkedStructure
         void AddFirst(Node<T> new_node);
         void AddLast(T value);
         void AddLast(Node<T> new_node);
+        bool Contains(T value);
+        void CopyTo(T[] array, int index);
+        Node<T> Find(T value);
+        Node<T> FindLast(T value);
         bool Remove(T value);
         //void Remove(Node<T> node);
         void RemoveFirst();
         void RemoveLast();
+        T[] ToArray();
     }
     public class DoublyLinkedList<T>:IDoublyLinkedList<T>
     {
@@ -132,6 +137,25 @@ namespace LinkedStructure
             count = 0;
         }
 
+        public void CopyTo(T[] array, int index)
+        {
+            if (array == null)
+                throw new ArgumentNullException(nameof(array));
+            if (index < 0 || index > array.Length)
+                throw new ArgumentOutOfRangeException();
+            if (array.Length - index < Count)
+                throw new ArgumentException();
+            Node<T> node = first;
+            if (node == null)
+                return;
+            do
+            {
+                array[index++] = node.Value;
+                node = node.next;
+            }
+            while (node != null);
+        }
+
         public bool Contains(T value) => Find(value) != null;
 
         public Node<T> Find(T value)
@@ -145,6 +169,24 @@ namespace LinkedStructure
                     {
                         node = node.next;
                         if (node.next == null) return null;
+                    }
+                    return node;
+                }
+            }
+            return null;
+        }
+
+        public Node<T> FindLast(T value)
+        {
+            Node<T> node = last;
+            if (node != null)
+            {
+                if (value != null)
+                {
+                    while (!node.Value.Equals(value) && (node.previous != null))
+                    {
+                        node = node.previous;
+                        if (node.previous == null) return null;
                     }
                     return node;
                 }
@@ -245,6 +287,18 @@ namespace LinkedStructure
             Node<T> node = last.previous;
             InternalRemoveNode(last);
             last = node;
+        }
+
+        public T[] ToArray()
+        {
+            T[] array = new T[count];
+            Node<T> node = first;
+            for (int i = 0; i < count; i++)
+            {
+                array[i] = node.Value;
+                node = node.Next;
+            }
+            return array;
         }
 
         IEnumerator IEnumerable.GetEnumerator()
