@@ -62,13 +62,17 @@ namespace LinkedApp
             Console.WriteLine(l.Capacity);
             l.Delete(0);
             l.DeleteLast();
+            l.Add(1);
             Console.WriteLine(l.Count);
             foreach (var item in l)
             {
                 Console.Write(item + " ");
             }
             Console.WriteLine();
+
+
             Console.WriteLine();
+            
 
             DoublyLinkedList<int> list1 = new DoublyLinkedList<int>();
             list1.AddFirst(5);

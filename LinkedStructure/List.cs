@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LinkedStructure
 {
@@ -13,14 +10,18 @@ namespace LinkedStructure
         int Count { get; }
         bool Contains(T value);
         void Add(T value);
+        void CopyTo(T[] array, int index);
         T DeleteLast();
         T Delete(int pos);
         int IndexOf(T value);
         int LastIndexOf(T value);
         void Insert(T value, int pos);
         void Resize(int capacity);
+        void Sort();
+        T[] ToArray();
     }
     public class List<T> : IList<T>
+        where T:IComparable<T>
     {
         int capacity;
         public int Capacity { get => capacity; }
@@ -75,7 +76,7 @@ namespace LinkedStructure
         }
 
         public bool Contains(T value) => IndexOf(value) != -1;
-        
+
         public void CopyTo(T[] array, int index)
         {
             if (array == null)
@@ -198,6 +199,34 @@ namespace LinkedStructure
                 array[i] = A[i];
             }
             return array;
+        }
+
+        public void Sort()
+        {
+            if (count == 0) throw new Exception();
+            else Sort(0, count - 1);
+        }
+
+        void Sort(int low, int high)
+        {
+            int i = low;   
+            int j = high;   
+            T x = A[(low + high) >> 1];    
+            do
+            {
+                while (A[i].CompareTo(x) < 0) ++i;   
+                while (A[j].CompareTo(x) > 0) --j;
+                if (i <= j)  
+                {
+                    T temp = A[i];   
+                    A[i] = A[j];
+                    A[j] = temp;
+                    i++;
+                    j--;
+                }
+            } while (i < j);
+            if (low < j) Sort(low, j);
+            if (i < high) Sort(i, high);
         }
 
         public IEnumerator<T> GetEnumerator()
