@@ -213,7 +213,7 @@ namespace LinkedTests
             list.AddLast(6);
             list.AddFirst(7);
             list.AddFirst(1);
-            var res = list.Find(5);
+            var res = list.Find(1);
             Assert.IsNotNull(res);
         }
         [Test]
@@ -226,6 +226,94 @@ namespace LinkedTests
             list.AddFirst(1);
             var res = list.Find(2);
             Assert.IsNull(res);
+        }
+        [Test]
+        public void ClearDLL()
+        {
+            DoublyLinkedList<int> list = new DoublyLinkedList<int>();
+            list.AddLast(5);
+            list.AddLast(8);
+            list.AddLast(1);
+            list.AddLast(2);
+            DoublyLinkedList<int> d = new DoublyLinkedList<int>();
+            list.Clear();
+            Assert.AreEqual(list, d);
+        }
+        [Test]
+        public void ContainsInDLL()
+        {
+            DoublyLinkedList<int> list = new DoublyLinkedList<int>();
+            list.AddLast(5);
+            list.AddLast(8);
+            list.AddLast(1);
+            list.AddLast(2);
+            bool exp = true;
+            bool res = list.Contains(2);
+            Assert.AreEqual(exp, res);
+        }
+        [Test]
+        public void NotContainsInDLL()
+        {
+            DoublyLinkedList<int> list = new DoublyLinkedList<int>();
+            list.AddLast(5);
+            list.AddLast(8);
+            list.AddLast(1);
+            list.AddLast(2);
+            bool exp = false;
+            bool res = list.Contains(9);
+            Assert.AreEqual(exp, res);
+        }
+        [Test]
+        public void DllToArray()
+        {
+            DoublyLinkedList<int> list = new DoublyLinkedList<int>();
+            list.AddLast(5);
+            list.AddLast(8);
+            list.AddLast(1);
+            list.AddLast(2);
+            int[] res = list.ToArray();
+            int[] exp = new int[] { 5, 8, 1, 2 };
+            Assert.AreEqual(exp, res);
+        }
+        [Test]
+        public void DLLCopyToNotNullArray()
+        {
+            DoublyLinkedList<int> list = new DoublyLinkedList<int>();
+            list.AddLast(5);
+            list.AddLast(8);
+            list.AddLast(1);
+            list.AddLast(2);
+            int[] res = new int[list.Count];
+            list.CopyTo(res, 0);
+            int[] exp = new int[] { 5, 8, 1, 2 };
+            Assert.AreEqual(exp, res);
+        }
+        [Test]
+        public void DLLCopyToNullArray()
+        {
+            DoublyLinkedList<int> list = new DoublyLinkedList<int>();
+            list.AddLast(5);
+            list.AddLast(8);
+            list.AddLast(1);
+            list.AddLast(2);
+            int[] res = null;
+            Assert.Throws<ArgumentNullException>(() => list.CopyTo(res, 0));
+        }
+        [Test]
+        public void DLLForeach()
+        {
+            DoublyLinkedList<int> list = new DoublyLinkedList<int>();
+            list.AddLast(5);
+            list.AddLast(8);
+            list.AddLast(1);
+            list.AddLast(2);
+            int res = 0;
+            foreach (var item in list)
+            {
+                res++;
+            }
+            int exp = list.Count;
+            Assert.AreEqual(exp, res);
         }
     }
 }

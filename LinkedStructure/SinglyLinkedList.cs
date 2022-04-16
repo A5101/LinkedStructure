@@ -97,10 +97,10 @@ namespace LinkedStructure
             {
                 if (value != null)
                 {
-                    while (!node.Value.Equals(value) && (node.next != null))
+                    while (!node.Value.Equals(value) && (node != null))
                     {
                         node = node.next;
-                        if (node.next == null) return null;
+                        if (node == null) return null;
                     }
                     return node;
                 }

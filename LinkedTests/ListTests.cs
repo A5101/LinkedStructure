@@ -96,5 +96,93 @@ namespace LinkedTests
             list.Add(3);
             Assert.Throws<Exception>(() => list.Insert(5, 5));
         }
+        [Test]
+        public void ClearList()
+        {
+            List<int> list = new List<int>();
+            list.Add(5);
+            list.Add(8);
+            list.Add(1);
+            list.Add(2);
+            List<int> d = new List<int>(list.Capacity);
+            list.Clear();
+            Assert.AreEqual(list, d);
+        }
+        [Test]
+        public void ContainsInList()
+        {
+            List<int> list = new List<int>();
+            list.Add(5);
+            list.Add(8);
+            list.Add(1);
+            list.Add(2);
+            bool exp = true;
+            bool res = list.Contains(5);
+            Assert.AreEqual(exp, res);
+        }
+        [Test]
+        public void NotContainsInList()
+        {
+            List<int> list = new List<int>();
+            list.Add(5);
+            list.Add(8);
+            list.Add(1);
+            list.Add(2);
+            bool exp = false;
+            bool res = list.Contains(9);
+            Assert.AreEqual(exp, res);
+        }
+        [Test]
+        public void ListToArray()
+        {
+            List<int> list = new List<int>();
+            list.Add(5);
+            list.Add(8);
+            list.Add(1);
+            list.Add(2);
+            int[] res = list.ToArray();
+            int[] exp = new int[] { 5, 8, 1, 2 };
+            Assert.AreEqual(exp, res);
+        }
+        [Test]
+        public void ListCopyToNotNullArray()
+        {
+            List<int> list = new List<int>();
+            list.Add(5);
+            list.Add(8);
+            list.Add(1);
+            list.Add(2);
+            int[] res = new int[list.Count];
+            list.CopyTo(res, 0);
+            int[] exp = new int[] { 5, 8, 1, 2 };
+            Assert.AreEqual(exp, res);
+        }
+        [Test]
+        public void ListCopyToNullArray()
+        {
+            List<int> list = new List<int>();
+            list.Add(5);
+            list.Add(8);
+            list.Add(1);
+            list.Add(2);
+            int[] res = null;
+            Assert.Throws<ArgumentNullException>(() => list.CopyTo(res, 0));
+        }
+        [Test]
+        public void ListForeach()
+        {
+            List<int> list = new List<int>();
+            list.Add(5);
+            list.Add(8);
+            list.Add(1);
+            list.Add(2);
+            int res = 0;
+            foreach (var item in list)
+            {
+                res++;
+            }
+            int exp = list.Count;
+            Assert.AreEqual(exp, res);
+        }
     }
 }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace LinkedStructure
 {
-    interface IDequeue<T> : IEnumerable<T>
+    interface IDeque<T> : IEnumerable<T>
     {
         int Count { get; }
         void Clear();
@@ -18,7 +18,7 @@ namespace LinkedStructure
         T PopBack();
         T[] ToArray();
     }
-    public class Deque<T> : IDequeue<T>
+    public class Deque<T> : IDeque<T>
     {
         int count = 0;
         public int Count { get => count; }
@@ -59,10 +59,10 @@ namespace LinkedStructure
             {
                 if (value != null)
                 {
-                    while (!node.Value.Equals(value) && (node.next != null))
+                    while (!node.Value.Equals(value) && (node != null))
                     {
                         node = node.next;
-                        if (node.next == null) return false;
+                        if (node == null) return false;
                     }
                     return true;
                 }

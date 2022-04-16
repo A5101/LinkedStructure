@@ -56,10 +56,10 @@ namespace LinkedStructure
             {
                 if (value != null)
                 {
-                    while (!node.Value.Equals(value) && (node.next != null))
+                    while (!node.Value.Equals(value) && (node != null))
                     {
                         node = node.next;
-                        if (node.next == null) return false;
+                        if (node == null) return false;
                     }
                     return true;
                 }
@@ -75,13 +75,13 @@ namespace LinkedStructure
                 throw new ArgumentOutOfRangeException();
             if (array.Length - index < Count)
                 throw new ArgumentException();
-            Node<T> node = last;
+            Node<T> node = first;
             if (node == null)
                 return;
             do
             {
                 array[index++] = node.Value;
-                node = node.previous;
+                node = node.next;
             }
             while (node != null);
         }
@@ -129,11 +129,11 @@ namespace LinkedStructure
         public T[] ToArray()
         {
             T[] array = new T[count];
-            Node<T> node = last;
+            Node<T> node = first;
             for (int i = 0; i < count; i++)
             {
                 array[i] = node.Value;
-                node = node.previous;
+                node = node.next;
             }
             return array;
         }

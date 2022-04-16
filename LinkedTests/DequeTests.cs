@@ -97,5 +97,93 @@ namespace LinkedTests
             int res = deq.Count;
             Assert.AreEqual(exp, res);
         }
+        [Test]
+        public void ClearDeque()
+        {
+            Deque<int> deq = new Deque<int>();
+            deq.PushBack(5);
+            deq.PushBack(8);
+            deq.PushFront(1);
+            deq.PushFront(2);
+            Deque<int> d = new Deque<int>();
+            deq.Clear();
+            Assert.AreEqual(deq, d);
+        }
+        [Test]
+        public void ContainsInDeque()
+        {
+            Deque<int> deq = new Deque<int>();
+            deq.PushBack(5);
+            deq.PushBack(8);
+            deq.PushFront(1);
+            deq.PushFront(2);
+            bool exp = true;
+            bool res = deq.Contains(8);
+            Assert.AreEqual(exp, res);
+        }
+        [Test]
+        public void NotContainsInDeque()
+        {
+            Deque<int> deq = new Deque<int>();
+            deq.PushBack(5);
+            deq.PushBack(8);
+            deq.PushFront(1);
+            deq.PushFront(2);
+            bool exp = false;
+            bool res = deq.Contains(9);
+            Assert.AreEqual(exp, res);
+        }
+        [Test]
+        public void DequeToArray()
+        {
+            Deque<int> deq = new Deque<int>();
+            deq.PushBack(5);
+            deq.PushBack(8);
+            deq.PushFront(1);
+            deq.PushFront(2);
+            int[] res = deq.ToArray();
+            int[] exp = new int[] { 2, 1, 5, 8 };
+            Assert.AreEqual(exp, res);
+        }
+        [Test]
+        public void DequeCopyToNotNullArray()
+        {
+            Deque<int> deq = new Deque<int>();
+            deq.PushBack(5);
+            deq.PushBack(8);
+            deq.PushFront(1);
+            deq.PushFront(2);
+            int[] res = new int[deq.Count];
+            deq.CopyTo(res, 0);
+            int[] exp = new int[] { 2, 1, 5, 8 };
+            Assert.AreEqual(exp, res);
+        }
+        [Test]
+        public void DequeCopyToNullArray()
+        {
+            Deque<int> deq = new Deque<int>();
+            deq.PushBack(5);
+            deq.PushBack(8);
+            deq.PushFront(1);
+            deq.PushFront(2);
+            int[] res = null;
+            Assert.Throws<ArgumentNullException>(() => deq.CopyTo(res, 0));
+        }
+        [Test]
+        public void DequeForeach()
+        {
+            Deque<int> deq = new Deque<int>();
+            deq.PushBack(5);
+            deq.PushBack(8);
+            deq.PushFront(1);
+            deq.PushFront(2);
+            int res = 0;
+            foreach (var item in deq)
+            {
+                res++;
+            }
+            int exp = deq.Count;
+            Assert.AreEqual(exp, res);
+        }
     }
 }
