@@ -54,6 +54,18 @@ namespace LinkedTests
             Assert.AreEqual(exp, res);
         }
         [Test]
+        public void AddRangeTest()
+        {
+            List<int> list = new List<int>();
+            list.Add(1);
+            list.Add(2);
+            list.Add(3);
+            list.AddRange(new int[] { 1, 9, 5, 7});
+            int exp = 7;
+            int res = list[^1];
+            Assert.AreEqual(exp, res);
+        }
+        [Test]
         public void DeleteLastTest()
         {
             List<int> list = new List<int>();
@@ -131,6 +143,35 @@ namespace LinkedTests
             bool exp = false;
             bool res = list.Contains(9);
             Assert.AreEqual(exp, res);
+        }
+        [Test]
+        public void SearchInList()
+        {
+            List<int> list = new List<int>();
+            list.Add(5);
+            list.Add(8);
+            list.Add(1);
+            list.Add(2);
+            list.Add(9);
+            list.Add(4);
+            list.Sort();
+            int exp = 3;
+            int res = list.Search(5);
+            Assert.AreEqual(exp, res);
+        }
+        [Test]
+        public void ReverseList()
+        {
+            List<int> res = new List<int>(new int[] { 5, 8, 1, 2, 9, 4, 1 });
+            List<int> exp = new List<int>(new int[] { 1, 4, 9, 2, 1, 8, 5 });
+            res.Reverse();
+            Assert.AreEqual(exp, res);
+        }
+        [Test]
+        public void ReverseNullList()
+        {
+            List<int> res = null;
+            Assert.Throws<NullReferenceException>(() =>  res.Reverse());
         }
         [Test]
         public void ListToArray()
