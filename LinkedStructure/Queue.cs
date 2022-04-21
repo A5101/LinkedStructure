@@ -14,19 +14,31 @@ namespace LinkedStructure
         T Peek();
         T[] ToArray();
     }
+    /// <summary>
+    /// Представляет класс очереди
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class Queue<T>:IQueue<T>
     {
         int count = 0;
+        /// <summary>
+        /// Количество элементов в очереди
+        /// </summary>
         public int Count { get => count; }
 
         Node<T> first;
         Node<T> last;
-
+        /// <summary>
+        /// Инициализирует пустой экземпляр класса
+        /// </summary>
         public Queue()
         {
 
         }
-
+        /// <summary>
+        /// Инициализирует экземпляр класса с элементами из заданной коллекции
+        /// </summary>
+        /// <param name="collection"></param>
         public Queue(IEnumerable<T> collection)
         {
             if (collection == null) throw new ArgumentNullException();
@@ -35,7 +47,9 @@ namespace LinkedStructure
                 Enqueue(item);
             }
         }
-
+        /// <summary>
+        /// Очистка очереди
+        /// </summary>
         public void Clear()
         {
             Node<T> node1 = first;
@@ -48,7 +62,11 @@ namespace LinkedStructure
             first = null;
             count = 0;
         }
-
+        /// <summary>
+        /// Проверка вхождения элемента в очередь
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public bool Contains(T value)
         {
             Node<T> node = first;
@@ -66,7 +84,11 @@ namespace LinkedStructure
             }
             return false;
         }
-
+        /// <summary>
+        /// Копирование коллекции элементов очереди в заданный массив
+        /// </summary>
+        /// <param name="array"></param>
+        /// <param name="index"></param>
         public void CopyTo(T[] array, int index)
         {
             if (array == null)
@@ -85,7 +107,10 @@ namespace LinkedStructure
             }
             while (node != null);
         }
-
+        /// <summary>
+        /// Получение первого элемента очереди с последующим его удалением из очереди
+        /// </summary>
+        /// <returns></returns>
         public T Dequeue()
         {
             Node<T> temp = first;
@@ -105,7 +130,10 @@ namespace LinkedStructure
             }
             else throw new NullReferenceException();
         }
-
+        /// <summary>
+        /// Добавление элемента в конец очереди
+        /// </summary>
+        /// <param name="value"></param>
         public void Enqueue(T value)
         {
             Node<T> node = new Node<T>(value);
@@ -119,13 +147,19 @@ namespace LinkedStructure
             }
             count++;
         }
-
+        /// <summary>
+        /// Получение первого элемента очерреди без его удаления
+        /// </summary>
+        /// <returns></returns>
         public T Peek()
         {
             if (count != 0) return first.Value;
             else throw new NullReferenceException();
         }
-
+        /// <summary>
+        /// Возврат коллекции элементов очереди в виде массива
+        /// </summary>
+        /// <returns></returns>
         public T[] ToArray()
         {
             T[] array = new T[count];

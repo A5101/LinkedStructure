@@ -15,16 +15,29 @@ namespace LinkedStructure
         void Push(T value);
         T[] ToArray();
     }
+    /// <summary>
+    /// Представляет класс стека
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class Stack<T>:IStack<T>
     {
         int count = 0;
+        /// <summary>
+        /// Количество элементов в стеке
+        /// </summary>
         public int Count { get => count;}
         Node<T> head;
+        /// <summary>
+        /// Инициализирует пустой экземпляр стека
+        /// </summary>
         public Stack()
         {
 
         }
-
+        /// <summary>
+        /// Инициализирует экземпляр стека с элементами их заданной коллекции
+        /// </summary>
+        /// <param name="collection"></param>
         public Stack(IEnumerable<T> collection)
         {
             if (collection == null) throw new ArgumentNullException();
@@ -33,7 +46,9 @@ namespace LinkedStructure
                 Push(item);
             }
         }
-
+        /// <summary>
+        /// Очистка стека
+        /// </summary>
         public void Clear()
         {
             Node<T> node1 = head;
@@ -46,7 +61,11 @@ namespace LinkedStructure
             head = null;
             count = 0;
         }
-
+        /// <summary>
+        /// Проверка вхожления элемента в стек
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public bool Contains(T value)
         {
             Node<T> node = head;
@@ -64,7 +83,11 @@ namespace LinkedStructure
             }
             return false;
         }
-
+        /// <summary>
+        /// Копирование коллекции элементов стека в заданный массив
+        /// </summary>
+        /// <param name="array"></param>
+        /// <param name="index"></param>
         public void CopyTo(T[] array, int index)
         {
             if (array == null)
@@ -83,7 +106,10 @@ namespace LinkedStructure
             }
             while (node != null);
         }
-
+        /// <summary>
+        /// Получение вершины стека с ее последующим удалением
+        /// </summary>
+        /// <returns></returns>
         public T Pop()
         {
             if (head != null)
@@ -95,13 +121,19 @@ namespace LinkedStructure
             }
             else throw new NullReferenceException();
         }
-
+        /// <summary>
+        /// Получение веришыны стека без ее удаления
+        /// </summary>
+        /// <returns></returns>
         public T Peek()
         {
             if (head != null) return head.Value;
             else throw new NullReferenceException();
         }
-
+        /// <summary>
+        /// Добавление элемента в стек
+        /// </summary>
+        /// <param name="value"></param>
         public void Push(T value)
         {
             Node<T> node = new Node<T>(value);
@@ -109,7 +141,10 @@ namespace LinkedStructure
             head = node;
             count++;
         }
-
+        /// <summary>
+        /// Возврат элементов стека в виде массива
+        /// </summary>
+        /// <returns></returns>
         public T[] ToArray()
         {
             T[] array = new T[count];

@@ -17,19 +17,31 @@ namespace LinkedStructure
         T PopFront();
         T PopBack();
         T[] ToArray();
-    }
+    }/// <summary>
+    /// Представляет класс структуры Дек
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class Deque<T> : IDeque<T>
     {
         int count = 0;
+        /// <summary>
+        /// Количество элементов в коллекции
+        /// </summary>
         public int Count { get => count; }
 
         Node<T> first;
         Node<T> last;
+        /// <summary>
+        /// Инициализация пустого экземпляра класса
+        /// </summary>
         public Deque()
         {
 
         }
-
+        /// <summary>
+        /// Инициализация экземпляра класса с элементами из заданной коллекции
+        /// </summary>
+        /// <param name="collection"></param>
         public Deque(IEnumerable<T> collection)
         {
             if (collection == null) throw new ArgumentNullException();
@@ -38,7 +50,9 @@ namespace LinkedStructure
                 PushBack(item);
             }
         }
-
+        /// <summary>
+        /// Очистка дека
+        /// </summary>
         public void Clear()
         {
             Node<T> node1 = first;
@@ -51,7 +65,11 @@ namespace LinkedStructure
             first = null;
             count = 0;
         }
-
+        /// <summary>
+        /// Проверка вхождения элемента в дек
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public bool Contains(T value) 
         {
             Node<T> node = first;
@@ -69,7 +87,11 @@ namespace LinkedStructure
             }
             return false;
         }
-
+        /// <summary>
+        /// Копирование элементов дека в массив
+        /// </summary>
+        /// <param name="array"></param>
+        /// <param name="index"></param>
         public void CopyTo(T[] array, int index)
         {
             if (array == null)
@@ -88,7 +110,10 @@ namespace LinkedStructure
             }
             while (node != null);
         }
-
+        /// <summary>
+        /// Добавление элемента в начало дека
+        /// </summary>
+        /// <param name="value"></param>
         public void PushFront(T value)
         {
             Node<T> node = new Node<T>(value);
@@ -103,7 +128,10 @@ namespace LinkedStructure
             }
             count++;
         }
-
+        /// <summary>
+        /// Добавления элемента в конец дека
+        /// </summary>
+        /// <param name="value"></param>
         public void PushBack(T value)
         {
             Node<T> node = new Node<T>(value);
@@ -118,7 +146,10 @@ namespace LinkedStructure
             }
             count++;
         }
-
+        /// <summary>
+        /// Получение первого элемента с его последующим удалением из дека
+        /// </summary>
+        /// <returns></returns>
         public T PopFront()
         {
             Node<T> temp = first;
@@ -139,7 +170,10 @@ namespace LinkedStructure
             }
             else throw new NullReferenceException();
         }
-
+        /// <summary>
+        /// Получение последенего элемента с его последующим удалением из дека
+        /// </summary>
+        /// <returns></returns>
         public T PopBack()
         {
             Node<T> temp = last;
@@ -160,19 +194,28 @@ namespace LinkedStructure
             }
             else throw new NullReferenceException();
         }
-
+        /// <summary>
+        /// Получение первого элемента дека
+        /// </summary>
+        /// <returns></returns>
         public T PeekFront()
         {
             if (count != 0) return first.Value;
             else throw new NullReferenceException();
         }
-
+        /// <summary>
+        /// Получение последнего элемента дека
+        /// </summary>
+        /// <returns></returns>
         public T PeekBack()
         {
             if (count != 0) return last.Value;
             else throw new NullReferenceException();
         }
-
+        /// <summary>
+        /// Возврат массива элементов дека
+        /// </summary>
+        /// <returns></returns>
         public T[] ToArray()
         {
             T[] array = new T[count];

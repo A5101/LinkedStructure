@@ -18,22 +18,40 @@ namespace LinkedStructure
         bool Remove(T value);
         T[] ToArray();
     }
+    /// <summary>
+    /// Представляет класс односвязного списка
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class SinglyLinkedList<T>: ISinglyLinkedList<T>
     {
         Node<T> first;
+        /// <summary>
+        /// Получение первого элемента списка
+        /// </summary>
         public Node<T> First => first;
 
         Node<T> last;
+        /// <summary>
+        /// Получение последнего элемента списка
+        /// </summary>
         public Node<T> Last => last;
 
         int count;
+        /// <summary>
+        /// Количество элементов в списке
+        /// </summary>
         public int Count => count;
-
+        /// <summary>
+        /// Инициализирует пустой экземпляр списка
+        /// </summary>
         public SinglyLinkedList()
         {
 
         }
-
+        /// <summary>
+        /// Инициализирует список со значениями из заданной коллекции
+        /// </summary>
+        /// <param name="collection"></param>
         public SinglyLinkedList(IEnumerable<T> collection)
         {
             if (collection == null) throw new ArgumentNullException();
@@ -42,20 +60,28 @@ namespace LinkedStructure
                 Add(item);
             }
         }
-
+        /// <summary>
+        /// Добавление элемента в конец списка
+        /// </summary>
+        /// <param name="value"></param>
         public void Add(T value)
         {
             Node<T> node = new Node<T>(value);
             if (first == null) InternalInsertInEmptyList(node);
             else InternalInsertAfter(last, node);
         }
-
+        /// <summary>
+        /// Добавление узла в конец списка
+        /// </summary>
+        /// <param name="node"></param>
         public void Add(Node<T> node)
         {
             if (first == null) InternalInsertInEmptyList(node);
             else InternalInsertAfter(last, node);
         }
-
+        /// <summary>
+        /// Очистка списка
+        /// </summary>
         public void Clear()
         {
             Node<T> node1 = first;
@@ -68,9 +94,17 @@ namespace LinkedStructure
             first = null;
             count = 0;
         }
-
+        /// <summary>
+        /// Проверка вхождения элемента в список
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public bool Contains(T value) => Find(value) != null;
-
+        /// <summary>
+        /// Копирование элементов списка в заданный массив
+        /// </summary>
+        /// <param name="array"></param>
+        /// <param name="index"></param>
         public void CopyTo(T[] array, int index)
         {
             if (array == null)
@@ -89,7 +123,11 @@ namespace LinkedStructure
             }
             while (node != null);
         }
-
+        /// <summary>
+        /// Возврат узла с заданным значением
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public Node<T> Find(T value)
         {
             Node<T> node = first;
@@ -121,7 +159,11 @@ namespace LinkedStructure
             last = new_node;
             ++count;
         }
-
+        /// <summary>
+        /// Удаление узла списка с заданным значением
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public bool Remove(T value)
         {
             Node<T> current = first;
@@ -150,7 +192,10 @@ namespace LinkedStructure
             }
             return false;
         }
-
+        /// <summary>
+        /// Возврат коллекции элементов списка в виде массива
+        /// </summary>
+        /// <returns></returns>
         public T[] ToArray()
         {
             T[] array = new T[count];
