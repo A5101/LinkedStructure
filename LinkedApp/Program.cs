@@ -7,6 +7,13 @@ namespace LinkedApp
     {
         static void Main()
         {
+            System.Collections.Generic.List<System.Collections.Generic.List<int>> qq = new System.Collections.Generic.List<System.Collections.Generic.List<int>>();
+            qq.Add(new System.Collections.Generic.List<int> { 5, 5, 7 });
+            qq.Add(new System.Collections.Generic.List<int> { 8, 9, 7 });
+            qq.Sort();
+            Console.WriteLine(string.Join(" ", qq));
+
+
             SinglyLinkedList<int> list = new SinglyLinkedList<int>();
             list.Add(7);
             list.Add(new Node<int>(5));
