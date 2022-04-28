@@ -28,7 +28,7 @@ namespace LinkedStructure
     /// поддерживающий операции вставки и удаления
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class List<T> : IList<T>
+    public class List<T> : IList<T>, ILinkedStructure<T>
         where T:IComparable<T>
     {
         int capacity;
@@ -352,6 +352,32 @@ namespace LinkedStructure
         IEnumerator IEnumerable.GetEnumerator()
         {
             return A.GetEnumerator();
+        }
+        public void RemoveLast()
+        {
+            Delete(count - 1);
+        }
+        public void RemoveFirst()
+        {
+            Delete(0);
+        }
+
+        public void AddFirst(T value)
+        {
+            Insert(value, count - 1);
+        }
+
+        public void AddLast(T value)
+        {
+            Add(value);
+        }
+
+        IEnumerator<Node<T>> IEnumerable<Node<T>>.GetEnumerator()
+        {
+            for (int i = 0; i < count; i++)
+            {
+                yield return new Node<T>(A[i]);
+            }
         }
     }
 }

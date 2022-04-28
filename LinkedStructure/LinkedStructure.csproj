@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Deque.cs" />
     <Compile Include="DoublyLinkedList.cs" />
+    <Compile Include="ILinkedStructure.cs" />
     <Compile Include="List.cs" />
     <Compile Include="Node.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

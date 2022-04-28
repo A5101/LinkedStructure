@@ -19,7 +19,7 @@ namespace LinkedStructure
     /// Представляет класс стека
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class Stack<T>:IStack<T>
+    public class Stack<T>:IStack<T>, ILinkedStructure<T>
     {
         int count = 0;
         /// <summary>
@@ -175,6 +175,26 @@ namespace LinkedStructure
                 yield return node;
                 node = node.next;
             }
+        }
+
+        public void AddFirst(T value)
+        {
+            Push(value);
+        }
+
+        public void AddLast(T value)
+        {
+            return;
+        }
+
+        public void RemoveFirst()
+        {
+            Pop();
+        }
+
+        public void RemoveLast()
+        {
+            return;
         }
     }
 }

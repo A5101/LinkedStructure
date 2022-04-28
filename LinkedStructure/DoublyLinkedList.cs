@@ -29,7 +29,7 @@ namespace LinkedStructure
     /// Представляет класс двусвязного списка
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class DoublyLinkedList<T>:IDoublyLinkedList<T>
+    public class DoublyLinkedList<T>:IDoublyLinkedList<T>, ILinkedStructure<T>
     {
         Node<T> first;
         /// <summary>
@@ -388,5 +388,5 @@ namespace LinkedStructure
                 node = node.next;
             }
         }
-    }
+        }
 }

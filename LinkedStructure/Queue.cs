@@ -18,7 +18,7 @@ namespace LinkedStructure
     /// Представляет класс очереди
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class Queue<T>:IQueue<T>
+    public class Queue<T>:IQueue<T>, ILinkedStructure<T>
     {
         int count = 0;
         /// <summary>
@@ -128,7 +128,7 @@ namespace LinkedStructure
                 count--;
                 return temp.Value;
             }
-            else throw new NullReferenceException();
+            else throw new Exception();
         }
         /// <summary>
         /// Добавление элемента в конец очереди
@@ -190,6 +190,26 @@ namespace LinkedStructure
                 yield return node;
                 node = node.next;
             }
+        }
+
+        public void AddFirst(T value)
+        {
+            return;
+        }
+
+        public void AddLast(T value)
+        {
+            Enqueue(value);
+        }
+
+        public void RemoveFirst()
+        {
+            Dequeue();
+        }
+
+        public void RemoveLast()
+        {
+            return;
         }
     }
 }

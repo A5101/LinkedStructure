@@ -21,7 +21,7 @@ namespace LinkedStructure
     /// Представляет класс структуры Дек
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class Deque<T> : IDeque<T>
+    public class Deque<T> : IDeque<T>, ILinkedStructure<T>
     {
         int count = 0;
         /// <summary>
@@ -246,6 +246,26 @@ namespace LinkedStructure
                 yield return node;
                 node = node.next;
             }
+        }
+
+        public void AddFirst(T value)
+        {
+            PushFront(value);
+        }
+
+        public void AddLast(T value)
+        {
+            PushBack(value);
+        }
+
+        public void RemoveFirst()
+        {
+            PopFront();
+        }
+
+        public void RemoveLast()
+        {
+            PopBack();
         }
     }
 }
