@@ -364,7 +364,7 @@ namespace LinkedStructure
 
         public void AddFirst(T value)
         {
-            Insert(value, count - 1);
+            Insert(value, 0);
         }
 
         public void AddLast(T value)

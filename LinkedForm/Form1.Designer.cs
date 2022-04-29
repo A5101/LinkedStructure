@@ -29,6 +29,7 @@ namespace LinkedForm
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.SelectedStructure = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -42,9 +43,15 @@ namespace LinkedForm
             this.удалитьЗначениеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.сНачалаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.сКонцаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.CurrentStructure = new System.Windows.Forms.TextBox();
+            this.очиститьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label3 = new System.Windows.Forms.Label();
+            this.Panel = new System.Windows.Forms.Panel();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.удалитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.первыйToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.последнийToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // SelectedStructure
@@ -85,7 +92,7 @@ namespace LinkedForm
             this.данныеToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(403, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(663, 28);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -103,18 +110,21 @@ namespace LinkedForm
             this.открытьФайлToolStripMenuItem.Name = "открытьФайлToolStripMenuItem";
             this.открытьФайлToolStripMenuItem.Size = new System.Drawing.Size(205, 26);
             this.открытьФайлToolStripMenuItem.Text = "Открыть файл";
+            this.открытьФайлToolStripMenuItem.Click += new System.EventHandler(this.открытьФайлToolStripMenuItem_Click);
             // 
             // сохранитьФайлToolStripMenuItem
             // 
             this.сохранитьФайлToolStripMenuItem.Name = "сохранитьФайлToolStripMenuItem";
             this.сохранитьФайлToolStripMenuItem.Size = new System.Drawing.Size(205, 26);
             this.сохранитьФайлToolStripMenuItem.Text = "Сохранить файл";
+            this.сохранитьФайлToolStripMenuItem.Click += new System.EventHandler(this.сохранитьФайлToolStripMenuItem_Click);
             // 
             // данныеToolStripMenuItem
             // 
             this.данныеToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.добавитьЗначениеToolStripMenuItem,
-            this.удалитьЗначениеToolStripMenuItem});
+            this.удалитьЗначениеToolStripMenuItem,
+            this.очиститьToolStripMenuItem});
             this.данныеToolStripMenuItem.Name = "данныеToolStripMenuItem";
             this.данныеToolStripMenuItem.Size = new System.Drawing.Size(78, 24);
             this.данныеToolStripMenuItem.Text = "Данные";
@@ -165,16 +175,12 @@ namespace LinkedForm
             this.сКонцаToolStripMenuItem.Text = "С конца";
             this.сКонцаToolStripMenuItem.Click += new System.EventHandler(this.сКонцаToolStripMenuItem_Click);
             // 
-            // CurrentStructure
+            // очиститьToolStripMenuItem
             // 
-            this.CurrentStructure.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.CurrentStructure.Location = new System.Drawing.Point(12, 93);
-            this.CurrentStructure.Multiline = true;
-            this.CurrentStructure.Name = "CurrentStructure";
-            this.CurrentStructure.Size = new System.Drawing.Size(379, 367);
-            this.CurrentStructure.TabIndex = 6;
+            this.очиститьToolStripMenuItem.Name = "очиститьToolStripMenuItem";
+            this.очиститьToolStripMenuItem.Size = new System.Drawing.Size(229, 26);
+            this.очиститьToolStripMenuItem.Text = "Очистить";
+            this.очиститьToolStripMenuItem.Click += new System.EventHandler(this.очиститьToolStripMenuItem_Click);
             // 
             // label3
             // 
@@ -188,23 +194,69 @@ namespace LinkedForm
             this.label3.TabIndex = 7;
             this.label3.Text = "Текущая структура";
             // 
+            // Panel
+            // 
+            this.Panel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Panel.AutoScroll = true;
+            this.Panel.BackColor = System.Drawing.SystemColors.Info;
+            this.Panel.Location = new System.Drawing.Point(12, 103);
+            this.Panel.MinimumSize = new System.Drawing.Size(631, 506);
+            this.Panel.Name = "Panel";
+            this.Panel.Size = new System.Drawing.Size(639, 508);
+            this.Panel.TabIndex = 8;
+            this.Panel.Paint += new System.Windows.Forms.PaintEventHandler(this.Panel_Paint);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.удалитьToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(135, 28);
+            // 
+            // удалитьToolStripMenuItem
+            // 
+            this.удалитьToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.первыйToolStripMenuItem,
+            this.последнийToolStripMenuItem});
+            this.удалитьToolStripMenuItem.Name = "удалитьToolStripMenuItem";
+            this.удалитьToolStripMenuItem.Size = new System.Drawing.Size(134, 24);
+            this.удалитьToolStripMenuItem.Text = "Удалить";
+            // 
+            // первыйToolStripMenuItem
+            // 
+            this.первыйToolStripMenuItem.Name = "первыйToolStripMenuItem";
+            this.первыйToolStripMenuItem.Size = new System.Drawing.Size(170, 26);
+            this.первыйToolStripMenuItem.Text = "Первый";
+            this.первыйToolStripMenuItem.Click += new System.EventHandler(this.первыйToolStripMenuItem_Click);
+            // 
+            // последнийToolStripMenuItem
+            // 
+            this.последнийToolStripMenuItem.Name = "последнийToolStripMenuItem";
+            this.последнийToolStripMenuItem.Size = new System.Drawing.Size(170, 26);
+            this.последнийToolStripMenuItem.Text = "Последний";
+            this.последнийToolStripMenuItem.Click += new System.EventHandler(this.последнийToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(403, 472);
+            this.ClientSize = new System.Drawing.Size(663, 623);
+            this.Controls.Add(this.Panel);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.CurrentStructure);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.SelectedStructure);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.MinimumSize = new System.Drawing.Size(421, 519);
+            this.MinimumSize = new System.Drawing.Size(681, 670);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -221,12 +273,17 @@ namespace LinkedForm
         private System.Windows.Forms.ToolStripMenuItem данныеToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem добавитьЗначениеToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem удалитьЗначениеToolStripMenuItem;
-        private System.Windows.Forms.TextBox CurrentStructure;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ToolStripMenuItem вНачалоToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem вКонецToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem сНачалаToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem сКонцаToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem очиститьToolStripMenuItem;
+        private System.Windows.Forms.Panel Panel;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem удалитьToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem первыйToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem последнийToolStripMenuItem;
     }
 }
 

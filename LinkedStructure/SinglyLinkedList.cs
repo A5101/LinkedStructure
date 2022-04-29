@@ -22,7 +22,7 @@ namespace LinkedStructure
     /// Представляет класс односвязного списка
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class SinglyLinkedList<T>: ISinglyLinkedList<T>, ILinkedStructure<T>
+    public class SinglyLinkedList<T> : ISinglyLinkedList<T>, ILinkedStructure<T>
     {
         Node<T> first;
         /// <summary>
@@ -231,7 +231,7 @@ namespace LinkedStructure
         public void AddFirst(T value)
         {
             if (first == null) InternalInsertInEmptyList(new Node<T>(value));
-            else 
+            else
             {
                 Node<T> temp = first;
                 Node<T> temp1 = new Node<T>(value);
@@ -255,12 +255,13 @@ namespace LinkedStructure
         public void RemoveLast()
         {
             Node<T> temp = first;
-            for (int i = 0; i < count - 1; i++)
+            for (int i = 0; i < count - 2; i++)
             {
                 temp = temp.next;
             }
             temp.next = null;
             last = temp;
+            count--;
         }
     }
 }
