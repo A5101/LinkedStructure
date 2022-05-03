@@ -45,7 +45,7 @@ namespace LinkedTests
         public void DequeueInEmptyQueue()
         {
             Queue<int> que = new Queue<int>();
-            Assert.Throws<NullReferenceException>(() => que.Dequeue());
+            Assert.Throws<Exception>(() => que.Dequeue());
         }
         [Test]
         public void PeekInEmptyQueue()

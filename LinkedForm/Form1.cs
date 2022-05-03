@@ -1,18 +1,20 @@
-﻿using System;
-using System.Windows.Forms;
-using System.IO;
-using LinkedStructure;
+﻿using LinkedStructure;
+using System;
 using System.Drawing;
+using System.IO;
+using System.Windows.Forms;
 
 namespace LinkedForm
 {
     public partial class Form1 : Form
     {
         static ILinkedStructure<int> structure;
-        int count = 0;
+
         public Form1()
         {
             InitializeComponent();
+            Cursor = new Cursor(GetType(), "arrow.cur");
+            menuStrip1.Cursor = new Cursor(GetType(), "arrow.cur");
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -26,7 +28,6 @@ namespace LinkedForm
             string s = SelectedStructure.SelectedItem.ToString();
             Panel.Controls.Clear();
             Panel.Paint += new PaintEventHandler(Panel_Paint);
-            count = 0;
             Panel.Refresh();
             switch (s)
             {
@@ -39,48 +40,24 @@ namespace LinkedForm
             }
         }
 
-        private void вНачалоToolStripMenuItem_Click(object sender, EventArgs e)
+        void AddFirst()
         {
             string i = "0";
             if (structure != null && ShowInputDialog(ref i) == DialogResult.OK)
             {
                 structure.AddFirst(Convert.ToInt32(i));
-                
                 Reffresh();
-                count++;
             }
         }
 
-        private void вКонецToolStripMenuItem_Click(object sender, EventArgs e)
+        void AddLast()
         {
             string i = "0";
             if (structure != null && ShowInputDialog(ref i) == DialogResult.OK)
             {
                 structure.AddLast(Convert.ToInt32(i));
-                
                 Reffresh();
-                count++;
             }
-        }
-
-        private void сНачалаToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            RemoveFirst();
-        }
-        
-        private void первыйToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            RemoveFirst();
-        }
-
-        private void последнийToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            RemoveLast();
-        }
-        
-        private void сКонцаToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            RemoveLast();
         }
 
         void RemoveFirst()
@@ -88,9 +65,7 @@ namespace LinkedForm
             if (structure != null && structure.Count > 0)
             {
                 structure.RemoveFirst();
-                
-                Reffresh();count--;
-                
+                Reffresh();
             }
         }
 
@@ -99,13 +74,9 @@ namespace LinkedForm
             if (structure != null && structure.Count > 0)
             {
                 structure.RemoveLast();
-                
                 Reffresh();
-                count--;
             }
         }
-
-        
 
         private static DialogResult ShowInputDialog(ref string s)
         {
@@ -115,6 +86,21 @@ namespace LinkedForm
                 Size = new Size(size.Width - 10, 23),
                 Location = new Point(5, 5),
             };
+            textBox.KeyPress += textBox1_KeyPress;
+
+            void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+            {
+                if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+                    (e.KeyChar != '.'))
+                {
+                    e.Handled = true;
+                }
+                if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+                {
+                    e.Handled = true;
+                }
+            }
+
             Button okButton = new Button
             {
                 DialogResult = DialogResult.OK,
@@ -148,7 +134,7 @@ namespace LinkedForm
             return result;
         }
 
-        private void открытьФайлToolStripMenuItem_Click(object sender, EventArgs e)
+        void OpenFile()
         {
             structure.Clear();
             OpenFileDialog open = new OpenFileDialog
@@ -159,18 +145,29 @@ namespace LinkedForm
             { return; }
             StreamReader read = new StreamReader(open.FileName);
             string s = read.ReadToEnd();
-            while (s != "")
+            if (structure is Stack<int>)
             {
-                int i = s.IndexOf(",");
-                structure.AddLast(Convert.ToInt32(s.Substring(0, i)));
-                s = s.Remove(0, i + 1);
+                while (s != "")
+                {
+                    int i = s.IndexOf(",");
+                    structure.AddFirst(Convert.ToInt32(s.Substring(0, i)));
+                    s = s.Remove(0, i + 1);
+                }
+            }
+            else
+            {
+                while (s != "")
+                {
+                    int i = s.IndexOf(",");
+                    structure.AddLast(Convert.ToInt32(s.Substring(0, i)));
+                    s = s.Remove(0, i + 1);
+                }
             }
             read.Close();
             Reffresh();
-            count = structure.Count;
         }
 
-        private void сохранитьФайлToolStripMenuItem_Click(object sender, EventArgs e)
+        void SaveFile()
         {
             SaveFileDialog save = new SaveFileDialog
             {
@@ -181,16 +178,15 @@ namespace LinkedForm
             StreamWriter write = new StreamWriter(save.FileName);
             foreach (var s in structure)
             {
-                write.Write(s.Value + ",");
+                write.Write(s + ",");
             }
             write.Close();
         }
 
-        private void очиститьToolStripMenuItem_Click(object sender, EventArgs e)
+        void Clear()
         {
             structure.Clear();
             Reffresh();
-            count = 0;
         }
 
         void Reffresh()
@@ -207,10 +203,10 @@ namespace LinkedForm
                 else point = new Point(5 + 420 - 60 * (i % 8), 20 + 40 * (i / 8));
                 Button l = new Button
                 {
-                    Text = temp.Value.ToString(),
+                    Text = temp.ToString(),
                     Location = point,
                     FlatStyle = FlatStyle.Flat,
-                    Width = DefaultSize.Width >> 3,
+                    Width = 50,
                     ContextMenuStrip = contextMenuStrip1,
                     Tag = i,
                     BackColor = Color.Gainsboro,
@@ -228,28 +224,26 @@ namespace LinkedForm
         private void Panel_Paint(object sender, PaintEventArgs e)
         {
             //if (count != Panel.Controls.Count)
-           // {
-                e.Graphics.Clear(Panel.BackColor);
-                Pen pen = new Pen(Color.Black);
-                for (int i = 0; i < Panel.Controls.Count - 1; i++)
+            // {
+            e.Graphics.Clear(Panel.BackColor);
+            Pen pen = new Pen(Color.Black);
+            for (int i = 0; i < Panel.Controls.Count - 1; i++)
+            {
+                var a = Panel.Controls[i];
+                var b = Panel.Controls[i + 1];
+                if (i / 8 % 2 == 0 && i % 8 != 7)
                 {
-                    var a = Panel.Controls[i];
-                    var b = Panel.Controls[i + 1];
-                    if (i / 8 % 2 == 0 && i % 8 != 7)
-                    {
-                        e.Graphics.DrawLine(pen, a.Location.X + a.Width, a.Location.Y + a.Height / 2, b.Location.X, b.Location.Y + b.Height / 2);
-                    }
-                    else
-                    {
-                        if (i % 8 == 7)
-                            e.Graphics.DrawLine(pen, a.Location.X + a.Width / 2, a.Location.Y + a.Height, b.Location.X + b.Width / 2, b.Location.Y);
-                        else e.Graphics.DrawLine(pen, a.Location.X, a.Location.Y + a.Height / 2, b.Location.X + b.Width, b.Location.Y + b.Height / 2);
-                    }
+                    e.Graphics.DrawLine(pen, a.Location.X + a.Width, a.Location.Y + a.Height / 2, b.Location.X, b.Location.Y + b.Height / 2);
                 }
-           // }
+                else
+                {
+                    if (i % 8 == 7)
+                        e.Graphics.DrawLine(pen, a.Location.X + a.Width / 2, a.Location.Y + a.Height, b.Location.X + b.Width / 2, b.Location.Y);
+                    else e.Graphics.DrawLine(pen, a.Location.X, a.Location.Y + a.Height / 2, b.Location.X + b.Width, b.Location.Y + b.Height / 2);
+                }
+            }
+            // }
         }
-
-        
 
         void Button1_Click(object sender, MouseEventArgs e)
         {
@@ -257,10 +251,53 @@ namespace LinkedForm
             if (Convert.ToInt16(b.Tag) == 0)
             {
                 RemoveFirst();
-            }else if(Convert.ToInt16(b.Tag) == count - 1)
+            }
+            else if (Convert.ToInt16(b.Tag) == Panel.Controls.Count - 1)
             {
                 RemoveLast();
             }
+        }
+
+        private void вНачалоToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddFirst();
+        }
+
+        private void вКонецToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddLast();
+        }
+
+        private void сНачалаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RemoveFirst();
+        }
+
+        private void первыйToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RemoveFirst();
+        }
+
+        private void последнийToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RemoveLast();
+        }
+
+        private void сКонцаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RemoveLast();
+        }
+        private void очиститьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Clear();
+        }
+        private void сохранитьФайлToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFile();
+        }
+        private void открытьФайлToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFile();
         }
     }
 }

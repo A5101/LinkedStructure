@@ -30,6 +30,7 @@ namespace LinkedForm
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.SelectedStructure = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -92,7 +93,7 @@ namespace LinkedForm
             this.данныеToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(663, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(711, 28);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -204,7 +205,7 @@ namespace LinkedForm
             this.Panel.Location = new System.Drawing.Point(12, 103);
             this.Panel.MinimumSize = new System.Drawing.Size(631, 506);
             this.Panel.Name = "Panel";
-            this.Panel.Size = new System.Drawing.Size(639, 508);
+            this.Panel.Size = new System.Drawing.Size(687, 510);
             this.Panel.TabIndex = 8;
             this.Panel.Paint += new System.Windows.Forms.PaintEventHandler(this.Panel_Paint);
             // 
@@ -243,16 +244,17 @@ namespace LinkedForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(663, 623);
+            this.ClientSize = new System.Drawing.Size(711, 625);
             this.Controls.Add(this.Panel);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.SelectedStructure);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
-            this.MinimumSize = new System.Drawing.Size(681, 670);
+            this.MinimumSize = new System.Drawing.Size(729, 672);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "LinkedForm";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

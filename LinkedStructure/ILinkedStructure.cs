@@ -1,6 +1,6 @@
 ﻿namespace LinkedStructure
 {
-    public interface ILinkedStructure<T>:System.Collections.Generic.IEnumerable<Node<T>>
+    public interface ILinkedStructure<T>:System.Collections.Generic.IEnumerable<T>
     {
         int Count { get; }
         void Clear();

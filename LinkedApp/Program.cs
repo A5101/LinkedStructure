@@ -17,7 +17,7 @@ namespace LinkedApp
             Console.WriteLine(list.First.Value);
             foreach (var item in list)
             {
-                Console.Write(item.Value + " ");
+                Console.Write(item + " ");
             }
             Console.WriteLine();
             Console.WriteLine();
@@ -32,7 +32,7 @@ namespace LinkedApp
             Console.WriteLine(stack.Count);
             foreach (var item in stack)
             {
-                Console.Write(item.Value + " ");
+                Console.Write(item + " ");
             }
             Console.WriteLine();
             Console.WriteLine();
@@ -45,7 +45,7 @@ namespace LinkedApp
             Console.WriteLine(q.Count);
             foreach (var item in q)
             {
-                Console.Write(item.Value + " ");
+                Console.Write(item + " ");
             }
             Console.WriteLine();
             Console.WriteLine();
@@ -87,7 +87,7 @@ namespace LinkedApp
             Console.WriteLine(list1.Last.Value);
             foreach (var item in list1)
             {
-                Console.Write(item.Value + " ");
+                Console.Write(item + " ");
             }
             Console.WriteLine();
             Console.WriteLine();
@@ -103,7 +103,7 @@ namespace LinkedApp
             Console.WriteLine(deq.Count);
             foreach (var item in deq)
             {
-                Console.Write(item.Value + " ");
+                Console.Write(item + " ");
             }
             Console.WriteLine();
             Console.WriteLine();

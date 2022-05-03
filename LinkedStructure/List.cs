@@ -371,13 +371,5 @@ namespace LinkedStructure
         {
             Add(value);
         }
-
-        IEnumerator<Node<T>> IEnumerable<Node<T>>.GetEnumerator()
-        {
-            for (int i = 0; i < count; i++)
-            {
-                yield return new Node<T>(A[i]);
-            }
-        }
     }
 }

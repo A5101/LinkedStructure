@@ -238,12 +238,12 @@ namespace LinkedStructure
             return (IEnumerator<T>)GetEnumerator();
         }
 
-        public IEnumerator<Node<T>> GetEnumerator()
+        public IEnumerator<T> GetEnumerator()
         {
             Node<T> node = first;
             while (node != null)
             {
-                yield return node;
+                yield return node.Value;
                 node = node.next;
             }
         }
