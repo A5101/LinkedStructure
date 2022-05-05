@@ -12,7 +12,7 @@ namespace LinkedStructure
         void Add(T value);
         void AddRange(IEnumerable<T> collection);
         void CopyTo(T[] array, int index);
-        T DeleteLast();
+        void RemoveLast();
         T Delete(int pos);
         int IndexOf(T value);
         int LastIndexOf(T value);
@@ -141,9 +141,9 @@ namespace LinkedStructure
         /// Удаление последнего элемента из списка
         /// </summary>
         /// <returns></returns>
-        public T DeleteLast()
+        public void RemoveLast()
         {
-            return Delete(count - 1);
+            Delete(count - 1);
         }
         /// <summary>
         /// Удаление элемента из выбранной позиции
@@ -352,10 +352,6 @@ namespace LinkedStructure
         IEnumerator IEnumerable.GetEnumerator()
         {
             return A.GetEnumerator();
-        }
-        public void RemoveLast()
-        {
-            Delete(count - 1);
         }
         public void RemoveFirst()
         {

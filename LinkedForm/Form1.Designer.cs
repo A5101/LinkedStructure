@@ -201,7 +201,7 @@ namespace LinkedForm
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Panel.AutoScroll = true;
-            this.Panel.BackColor = System.Drawing.SystemColors.Info;
+            this.Panel.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.Panel.Location = new System.Drawing.Point(12, 103);
             this.Panel.MinimumSize = new System.Drawing.Size(631, 506);
             this.Panel.Name = "Panel";
@@ -244,6 +244,7 @@ namespace LinkedForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.ClientSize = new System.Drawing.Size(711, 625);
             this.Controls.Add(this.Panel);
             this.Controls.Add(this.label3);

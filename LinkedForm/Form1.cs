@@ -124,8 +124,8 @@ namespace LinkedForm
                 Text = "Ввод",
                 AcceptButton = okButton,
                 CancelButton = cancelButton,
-                StartPosition = FormStartPosition.CenterParent
-            };
+                StartPosition = FormStartPosition.CenterParent,
+        };
             inputBox.Controls.Add(textBox);
             inputBox.Controls.Add(okButton);
             inputBox.Controls.Add(cancelButton);
