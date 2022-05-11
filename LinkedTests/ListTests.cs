@@ -66,13 +66,13 @@ namespace LinkedTests
             Assert.AreEqual(exp, res);
         }
         [Test]
-        public void DeleteLastTest()
+        public void RemoveLastTest()
         {
             List<int> list = new List<int>();
             list.Add(1);
             list.Add(2);
             list.Add(3);
-            list.DeleteLast();
+            list.RemoveLast();
             int i;
             Assert.Throws<Exception>(() => i = list[2]);
         }
