@@ -1,11 +1,10 @@
-﻿using NUnit.Framework;
+﻿using LinkedStructure;
+using NUnit.Framework;
 using System;
-using LinkedStructure;
 namespace LinkedTests
 {
     public class SLLTests
     {
-
         [Test]
         public void CountNotEmptyTest()
         {

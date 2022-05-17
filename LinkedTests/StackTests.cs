@@ -1,6 +1,6 @@
-﻿using NUnit.Framework;
+﻿using LinkedStructure;
+using NUnit.Framework;
 using System;
-using LinkedStructure;
 namespace LinkedTests
 {
     public class StackTests
@@ -119,7 +119,7 @@ namespace LinkedTests
             stack.Push(2);
             int[] res = new int[stack.Count];
             stack.CopyTo(res, 0);
-            int[] exp = new int[] { 2, 1, 8, 5};
+            int[] exp = new int[] { 2, 1, 8, 5 };
             Assert.AreEqual(exp, res);
         }
         [Test]

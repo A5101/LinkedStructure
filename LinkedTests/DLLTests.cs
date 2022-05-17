@@ -1,6 +1,6 @@
-﻿using NUnit.Framework;
+﻿using LinkedStructure;
+using NUnit.Framework;
 using System;
-using LinkedStructure;
 namespace LinkedTests
 {
     public class DLLTests
@@ -42,7 +42,7 @@ namespace LinkedTests
         {
             DoublyLinkedList<int> list = new DoublyLinkedList<int>();
             int i;
-            Assert.Throws<NullReferenceException>(() => i = list.Last.Value); ;
+            Assert.Throws<NullReferenceException>(() => i = list.Last.Value);
         }
         [Test]
         public void FirstInNotEmptyTest()

@@ -1,22 +1,25 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+
 namespace LinkedStructure
 {
-    public class Queue<T> : ILinkedStructure<T>
+    public class Stack<T> : ILinkedStructure<T>
     {
         int count = 0;
         public int Count { get => count; }
         Node<T> first;
-        Node<T> last;
-        public Queue()
+        public Stack()
         {
 
         }
-        public Queue(IEnumerable<T> collection)
+        public Stack(IEnumerable<T> collection)
         {
             if (collection == null) throw new ArgumentNullException();
-            foreach (var item in collection) Enqueue(item);
+            foreach (var item in collection)
+            {
+                Push(item);
+            }
         }
         public void Clear()
         {
@@ -41,58 +44,51 @@ namespace LinkedStructure
                     {
                         node = node.next;
                         if (node == null) return false;
-                    } return true;
+                    }
+                    return true;
                 }
-            } return false;
+            }
+            return false;
         }
         public void CopyTo(T[] array, int index)
         {
-            if (array == null) throw new ArgumentNullException();
-            if (index < 0 || index > array.Length) throw new ArgumentOutOfRangeException();
-            if (array.Length - index < Count)  throw new ArgumentException();
+            if (array == null)
+                throw new ArgumentNullException(nameof(array));
+            if (index < 0 || index > array.Length)
+                throw new ArgumentOutOfRangeException();
+            if (array.Length - index < Count)
+                throw new ArgumentException();
             Node<T> node = first;
-            if (node == null) return;
+            if (node == null)
+                return;
             do
             {
                 array[index++] = node.Value;
                 node = node.next;
-            }
-            while (node != null);
+            } while (node != null);
         }
-        public T Dequeue()
+        public T Pop()
         {
-            Node<T> temp = first;
-            if (count == 1)
+            if (first != null)
             {
-                first = null;
-                last = null;
-                count--;
-                return temp.Value;
-            }
-            if (count > 1)
-            {
+                Node<T> temp = first;
                 first = first.next;
-                temp.next = null;
                 count--;
                 return temp.Value;
-            }  else throw new Exception();
-        }
-        public void Enqueue(T value)
-        {
-            Node<T> node = new Node<T>(value);
-            if (last == null)
-            {
-                first = node; last = node;
             }
-            else
-            {
-                last.next = node; last = node;
-            } count++;
+            else throw new NullReferenceException();
         }
         public T Peek()
         {
-            if (count != 0) return first.Value;
+            if (first != null) return first.Value;
             else throw new NullReferenceException();
+        }
+        public void Push(T value)
+        {
+            Node<T> node = new Node<T>(value);
+            node.next = first;
+            first = node;
+            count++;
         }
         public T[] ToArray()
         {
@@ -101,8 +97,9 @@ namespace LinkedStructure
             for (int i = 0; i < count; i++)
             {
                 array[i] = node.Value;
-                node = node.next;
-            }   return array;
+                node = node.Next;
+            }
+            return array;
         }
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
@@ -116,9 +113,9 @@ namespace LinkedStructure
                 node = node.next;
             }
         }
-        public void AddFirst(T value) { return; }
-        public void AddLast(T value) { Enqueue(value); }
-        public void RemoveFirst() { Dequeue(); }
+        public void AddFirst(T value) { Push(value); }
+        public void AddLast(T value) { return; }
+        public void RemoveFirst() { Pop(); }
         public void RemoveLast() { return; }
     }
 }

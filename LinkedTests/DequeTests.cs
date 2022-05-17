@@ -1,6 +1,6 @@
-using System;
-using NUnit.Framework;
 using LinkedStructure;
+using NUnit.Framework;
+using System;
 namespace LinkedTests
 {
     public class DequeueTests
@@ -178,10 +178,7 @@ namespace LinkedTests
             deq.PushFront(1);
             deq.PushFront(2);
             int res = 0;
-            foreach (var item in deq)
-            {
-                res++;
-            }
+            foreach (var item in deq) res++;
             int exp = deq.Count;
             Assert.AreEqual(exp, res);
         }

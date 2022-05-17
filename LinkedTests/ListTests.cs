@@ -1,6 +1,6 @@
-﻿using NUnit.Framework;
+﻿using LinkedStructure;
+using NUnit.Framework;
 using System;
-using LinkedStructure;
 namespace LinkedTests
 {
     public class ListTests
@@ -60,7 +60,7 @@ namespace LinkedTests
             list.Add(1);
             list.Add(2);
             list.Add(3);
-            list.AddRange(new int[] { 1, 9, 5, 7});
+            list.AddRange(new int[] { 1, 9, 5, 7 });
             int exp = 7;
             int res = list[^1];
             Assert.AreEqual(exp, res);
@@ -97,7 +97,7 @@ namespace LinkedTests
             list.Insert(7, 1);
             int exp = 7;
             int res = list[1];
-            Assert.AreEqual(exp,res);
+            Assert.AreEqual(exp, res);
         }
         [Test]
         public void InsertIncorrectPosTest()
@@ -171,7 +171,7 @@ namespace LinkedTests
         public void ReverseNullList()
         {
             List<int> res = null;
-            Assert.Throws<NullReferenceException>(() =>  res.Reverse());
+            Assert.Throws<NullReferenceException>(() => res.Reverse());
         }
         [Test]
         public void ListToArray()

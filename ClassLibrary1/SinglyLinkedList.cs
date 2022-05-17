@@ -70,9 +70,11 @@ namespace LinkedStructure
                     {
                         node = node.next;
                         if (node == null) return null;
-                    } return node;
+                    }
+                    return node;
                 }
-            } return null;
+            }
+            return null;
         }
         void InternalInsertInEmptyList(Node<T> node)
         {
@@ -111,7 +113,8 @@ namespace LinkedStructure
                 }
                 previous = current;
                 current = current.next;
-            } return false;
+            }
+            return false;
         }
         public T[] ToArray()
         {
@@ -121,7 +124,8 @@ namespace LinkedStructure
             {
                 array[i] = node.Value;
                 node = node.Next;
-            } return array;
+            }
+            return array;
         }
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
         IEnumerator<T> IEnumerable<T>.GetEnumerator() => GetEnumerator();

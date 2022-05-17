@@ -1,5 +1,5 @@
-﻿using System;
-using LinkedStructure;
+﻿using LinkedStructure;
+using System;
 
 namespace LinkedApp
 {
@@ -72,7 +72,7 @@ namespace LinkedApp
 
 
             Console.WriteLine();
-            
+
 
             DoublyLinkedList<int> list1 = new DoublyLinkedList<int>();
             list1.AddFirst(5);
